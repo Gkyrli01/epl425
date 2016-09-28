@@ -16,33 +16,19 @@ public class Server {
 	ArrayList OutStreams;
 	static ArrayList<PayLoad> randomPayloads=new ArrayList<PayLoad>();
 	long interval=2*500000000;
-	static int numberOfRequests=0;
+	static Integer numberOfRequests=0;
 	static  long  start;  
     static long now;
 	public  Server.PayLoad name() {
 		return new PayLoad();
 	}
-	class PayLoad{
- 		final int MIN=300000;
-		final int MAX=2000000;
-		String toBeSent;
-		public PayLoad() {
-			int msgSize=(int)(1700000*Math.random());
-				  StringBuilder sb = new StringBuilder(msgSize);
-				  for (int i=0; i<msgSize; i++) {
-				    sb.append('a');
-				  }
-				 toBeSent=sb.toString();
-				
-			// TODO Auto-generated constructor stub
-		}
-	}
+
 	
 	public class ClientHandler implements Runnable{
 		BufferedReader reader;
 		PrintWriter writer1;
 		Socket s;
-		
+		int myRequestsComp=0;
 		public ClientHandler(Socket clSock){
 			
 			try{
@@ -50,6 +36,7 @@ public class Server {
 				InputStreamReader isReader=new InputStreamReader(s.getInputStream());
 				reader=new BufferedReader(isReader);
 				numberOfRequests++;
+				myRequestsComp++;
 				
 				writer1=new PrintWriter(s.getOutputStream());
 			}catch(Exception ex){
@@ -76,8 +63,12 @@ public class Server {
 					//System.out.println(message);
 					writer1.println("Welcome " +retNum(message));
 					//System.out.println(message);
-					numberOfRequests++;
-			
+					myRequestsComp++;
+					
+					synchronized (numberOfRequests) {
+						numberOfRequests++;
+						
+					}
 					if(interval<System.nanoTime()-start){
 						System.out.println(numberOfRequests);
 						start=Long.MAX_VALUE;
@@ -108,11 +99,15 @@ public class Server {
 			
 			while(true){
 				Socket clSock=server.accept();
+
+				synchronized (numberOfRequests) {
+					
+				
 				if(numberOfRequests==0){
 					start = System.nanoTime();  
-					System.out.println(System.nanoTime());
+					//System.out.println(System.nanoTime());
 				}
-				
+				}
 				Thread t=new Thread(new ClientHandler(clSock));
 				t.start();
 				//System.out.println("got cockNection");
@@ -122,5 +117,19 @@ public class Server {
 		}
 	}
 
-
+	class PayLoad{
+ 		final int MIN=300000;
+		final int MAX=2000000;
+		String toBeSent;
+		public PayLoad() {
+			int msgSize=(int)(1700000*Math.random());
+				  StringBuilder sb = new StringBuilder(msgSize);
+				  for (int i=0; i<msgSize; i++) {
+				    sb.append('a');
+				  }
+				 toBeSent=sb.toString();
+				
+			// TODO Auto-generated constructor stub
+		}
+	}
 }
