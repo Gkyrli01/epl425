@@ -64,7 +64,7 @@ public class Server {
 					writer1.println("Welcome " +retNum(message));
 					//System.out.println(message);
 					myRequestsComp++;
-					
+					System.out.println(myRequestsComp);
 					synchronized (numberOfRequests) {
 						numberOfRequests++;
 						
