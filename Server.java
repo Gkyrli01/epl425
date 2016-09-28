@@ -20,7 +20,7 @@ public class Server {
 	int port = 0;
 	Integer repetitions = 0;
 	ArrayList<Thread> threads = new ArrayList<Thread>();
-
+	static ArrayList<String>payloads=new ArrayList<String>();
 	long interval = 1000000000;
 	static Integer numberOfRequests = 0;
 	static long start;
@@ -31,6 +31,7 @@ public class Server {
 		PrintWriter writer1;
 		Socket s;
 		int myRequestsComp = 0;
+		
 
 		public ClientHandler(Socket clSock) {
 
@@ -70,7 +71,7 @@ public class Server {
 			try {
 				while ((message = reader.readLine()) != null) {
 					// System.out.println(message);
-					writer1.println("Welcome " + retNum(message) + payload());
+					writer1.println("Welcome " + retNum(message) + payloads.get((int)(100*Math.random())));
 					// System.out.println(message);
 					myRequestsComp++;
 					numberOfRequests++;
@@ -142,8 +143,13 @@ public class Server {
 	}
 
 	public static void main(String[] args) {
-		for (int i = 0; i < 100; i++)
-			new Server(Integer.parseInt(args[0]), Integer.parseInt(args[1])).go();
+		Server rela=new Server(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+		for (int i = 0; i < 100; i++){
+			payloads.add(rela.payload());
+		}
+	
+			
+		rela.go();
 
 	}
 
