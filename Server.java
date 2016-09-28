@@ -72,7 +72,7 @@ public class Server {
 			try {
 				while ((message = reader.readLine()) != null) {
 					// System.out.println(message);
-					writer1.println("Welcome " + retNum(message) + payload());
+					writer1.println("Welcome " + retNum(message));
 					// System.out.println(message);
 					myRequestsComp++;
 					numberOfRequests++;
