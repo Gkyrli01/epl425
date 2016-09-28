@@ -37,6 +37,7 @@ public class Server {
 
 			try {
 				s = clSock;
+				s.setTcpNoDelay(true);
 				InputStreamReader isReader = new InputStreamReader(s.getInputStream());
 				reader = new BufferedReader(isReader);
 				numberOfRequests++;
