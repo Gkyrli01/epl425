@@ -21,7 +21,7 @@ public class Server {
 	Integer repetitions = 0;
 	ArrayList<Thread> threads = new ArrayList<Thread>();
 	static ArrayList<String>payloads=new ArrayList<String>();
-	long interval = 1000000000;
+	long interval = 2000000000;
 	static Integer numberOfRequests = 0;
 	static long start;
 	static long now;
