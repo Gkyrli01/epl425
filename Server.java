@@ -71,7 +71,7 @@ public class Server {
 			try {
 				while ((message = reader.readLine()) != null) {
 					// System.out.println(message);
-					writer1.println("Welcome " + retNum(message) + payloads.get((int)(100*Math.random())));
+					writer1.println("Welcome " + retNum(message) + payload());
 					// System.out.println(message);
 					myRequestsComp++;
 					numberOfRequests++;
@@ -144,10 +144,10 @@ public class Server {
 
 	public static void main(String[] args) {
 		Server rela=new Server(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-		for (int i = 0; i < 100; i++){
+		/*for (int i = 0; i < 100; i++){
 			payloads.add(rela.payload());
 		}
-	
+	*/
 			
 		rela.go();
 
