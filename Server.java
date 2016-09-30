@@ -28,7 +28,7 @@ public class Server {
 		String toBeSent;
 		public PayLoad() {
 			//int msgSize=(int)(1700000*Math.random());
-			int msgSize=(int)(115000);
+			int msgSize=(int)(1150000);
 				  StringBuilder sb = new StringBuilder(msgSize);
 				  for (int i=0; i<msgSize; i++) {
 				    sb.append('a');
@@ -50,7 +50,6 @@ public class Server {
 				s=clSock;
 				InputStreamReader isReader=new InputStreamReader(s.getInputStream());
 				reader=new BufferedReader(isReader);
-				numberOfRequests++;
 				
 				writer1=new PrintWriter(s.getOutputStream());
 			}catch(Exception ex){
