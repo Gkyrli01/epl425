@@ -28,7 +28,7 @@ public class Server {
 		String toBeSent;
 		public PayLoad() {
 			//int msgSize=(int)(1700000*Math.random());
-			int msgSize=(int)(1150000);
+			int msgSize=(int)(115000);
 				  StringBuilder sb = new StringBuilder(msgSize);
 				  for (int i=0; i<msgSize; i++) {
 				    sb.append('a');
