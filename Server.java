@@ -39,6 +39,16 @@ public class Server {
 		}
 	}
 	
+	String Payload(){
+		int msgSize=(int)(1700000*Math.random());
+		
+		  StringBuilder sb = new StringBuilder(msgSize);
+		  for (int i=0; i<msgSize; i++) {
+		    sb.append('a');
+		  }
+		 return sb.toString();
+	}
+	
 	public class ClientHandler implements Runnable{
 		BufferedReader reader;
 		PrintWriter writer1;
@@ -50,6 +60,7 @@ public class Server {
 				s=clSock;
 				InputStreamReader isReader=new InputStreamReader(s.getInputStream());
 				reader=new BufferedReader(isReader);
+				numberOfRequests++;
 				
 				writer1=new PrintWriter(s.getOutputStream());
 			}catch(Exception ex){
@@ -74,7 +85,7 @@ public class Server {
 			try{
 				while((message=reader.readLine())!=null){
 					//System.out.println(message);
-					writer1.println("Welcome " +retNum(message)+ok.toBeSent);
+					writer1.println("Welcome " +retNum(message)+Payload());
 					//System.out.println(message);
 					numberOfRequests++;
 			
