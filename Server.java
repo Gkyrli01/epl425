@@ -75,13 +75,13 @@ public class Server {
 			try{
 				while((message=reader.readLine())!=null){
 					//System.out.println(message);
-					writer1.println("Welcome " +retNum(message)+ok);
+					writer1.println("Welcome " +retNum(message)+ok.toBeSent);
 					//System.out.println(message);
 					numberOfRequests++;
 			
 					if(interval<System.nanoTime()-start){
 						System.out.println(numberOfRequests);
-						start=Long.MAX_VALUE;
+						start=System.nanoTime();
 					}
 					
 					writer1.flush();
