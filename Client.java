@@ -30,7 +30,7 @@ public class Client {
 	static Integer num=0;
 	 
 	public class User extends Thread {
-		int count=2;
+		int count=50;
 		ArrayList<Long> latencys=new ArrayList<Long>();
 		public User() {
 			// TODO Auto-generated constructor stub
@@ -124,7 +124,7 @@ public class Client {
 		ip = args[0];
 		port = Integer.parseInt(args[1]);
 		Client father=new Client();
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 10; i++) {
 			User mUser=father.retUser();
 			mUser.start();
 		}
