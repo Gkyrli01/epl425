@@ -32,6 +32,7 @@ public class Server {
 				  StringBuilder sb = new StringBuilder(msgSize);
 				  for (int i=0; i<msgSize; i++) {
 				    sb.append('a');
+				    sb.append(true);
 				  }
 				 toBeSent=sb.toString();
 				
